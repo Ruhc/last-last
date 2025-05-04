@@ -112,6 +112,16 @@ rpc_address: localhost
 endpoint_snitch: SimpleSnitch
 EOF
 
+# Patch cassandra.yaml for required directives
+CASSANDRA_CONF=/opt/cassandra/conf/cassandra.yaml
+if ! grep -q '^commitlog_sync:' $CASSANDRA_CONF; then
+    echo 'commitlog_sync: periodic' | sudo tee -a $CASSANDRA_CONF
+    echo 'commitlog_sync_period_in_ms: 10000' | sudo tee -a $CASSANDRA_CONF
+fi
+if ! grep -q '^partitioner:' $CASSANDRA_CONF; then
+    echo 'partitioner: org.apache.cassandra.dht.Murmur3Partitioner' | sudo tee -a $CASSANDRA_CONF
+fi
+
 # Create necessary directories
 echo "Creating directories..."
 mkdir -p /opt/hadoop/data/namenode
@@ -130,6 +140,8 @@ export KAFKA_HOME=/opt/kafka
 export PATH=\$PATH:\$KAFKA_HOME/bin
 export CASSANDRA_HOME=/opt/cassandra
 export PATH=\$PATH:\$CASSANDRA_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=\$PATH:\$JAVA_HOME/bin
 EOF
 
 # Initialize HDFS
