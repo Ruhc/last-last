@@ -1,0 +1,20 @@
+# Core dependencies
+kafka-python==2.0.2
+pyspark==3.4.1
+cassandra-driver==3.28.0
+Pillow==10.0.0
+Flask==2.3.3
+requests==2.31.0
+
+# Web interface
+flask-wtf==1.1.1
+python-dotenv==1.0.0
+
+# Utilities
+python-magic==0.4.27
+tqdm==4.66.1
+pytest==7.4.0
+
+# Monitoring
+psutil==5.9.5
+prometheus-client==0.17.1 
