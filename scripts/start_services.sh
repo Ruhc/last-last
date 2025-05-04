@@ -34,7 +34,7 @@ echo "Creating Kafka topic..."
     --bootstrap-server localhost:9092 \
     --topic images \
     --partitions 1 \
-    --replication-factor 1
+    --replication-factor 2 || echo "Topic 'images' already exists or not enough brokers for replication"
 
 # Create Cassandra keyspace and table
 echo "Creating Cassandra schema..."

@@ -71,6 +71,22 @@ Use the following tools for monitoring:
 - Hue: HDFS file browser
 - Web interface: Image management
 
+## Hue (Web-интерфейс для HDFS и SQL)
+
+Для удобной работы с HDFS, Hive, SparkSQL и др. установите Hue:
+
+```bash
+./scripts/install_hue.sh
+```
+
+После запуска Hue будет доступен по адресу:
+http://<IP-вашей-ВМ>:8888
+
+Hue позволяет:
+- Просматривать и загружать файлы в HDFS
+- Выполнять SQL-запросы к Hive, Impala, SparkSQL
+- Управлять заданиями и таблицами
+
 ## License
 
 MIT License 
