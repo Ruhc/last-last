@@ -21,11 +21,17 @@ echo "Installing Python dependencies..."
 pip3 install -r requirements.txt
 
 # Download and install Hadoop
-echo "Installing Hadoop..."
-wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
-tar -xzf hadoop-3.3.6.tar.gz
-sudo mv hadoop-3.3.6 /opt/hadoop
-rm hadoop-3.3.6.tar.gz
+if [ ! -d /opt/hadoop ]; then
+    echo "Installing Hadoop..."
+    if [ ! -f hadoop-3.3.6.tar.gz ]; then
+        wget https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
+    fi
+    tar -xzf hadoop-3.3.6.tar.gz
+    sudo mv hadoop-3.3.6 /opt/hadoop
+    rm hadoop-3.3.6.tar.gz
+else
+    echo "Hadoop already installed, skipping download."
+fi
 
 # Configure Hadoop
 echo "Configuring Hadoop..."
@@ -58,11 +64,17 @@ cat > /opt/hadoop/etc/hadoop/hdfs-site.xml << EOF
 EOF
 
 # Download and install Kafka
-echo "Installing Kafka..."
-wget https://dlcdn.apache.org/kafka/3.5.1/kafka_2.13-3.5.1.tgz
-tar -xzf kafka_2.13-3.5.1.tgz
-sudo mv kafka_2.13-3.5.1 /opt/kafka
-rm kafka_2.13-3.5.1.tgz
+if [ ! -d /opt/kafka ]; then
+    echo "Installing Kafka..."
+    if [ ! -f kafka_2.13-3.5.1.tgz ]; then
+        wget https://archive.apache.org/dist/kafka/3.5.1/kafka_2.13-3.5.1.tgz
+    fi
+    tar -xzf kafka_2.13-3.5.1.tgz
+    sudo mv kafka_2.13-3.5.1 /opt/kafka
+    rm kafka_2.13-3.5.1.tgz
+else
+    echo "Kafka already installed, skipping download."
+fi
 
 # Configure Kafka
 echo "Configuring Kafka..."
@@ -74,11 +86,17 @@ zookeeper.connect=localhost:2181
 EOF
 
 # Download and install Cassandra
-echo "Installing Cassandra..."
-wget https://dlcdn.apache.org/cassandra/4.1.2/apache-cassandra-4.1.2-bin.tar.gz
-tar -xzf apache-cassandra-4.1.2-bin.tar.gz
-sudo mv apache-cassandra-4.1.2 /opt/cassandra
-rm apache-cassandra-4.1.2-bin.tar.gz
+if [ ! -d /opt/cassandra ]; then
+    echo "Installing Cassandra..."
+    if [ ! -f apache-cassandra-4.1.2-bin.tar.gz ]; then
+        wget https://archive.apache.org/dist/cassandra/4.1.2/apache-cassandra-4.1.2-bin.tar.gz
+    fi
+    tar -xzf apache-cassandra-4.1.2-bin.tar.gz
+    sudo mv apache-cassandra-4.1.2 /opt/cassandra
+    rm apache-cassandra-4.1.2-bin.tar.gz
+else
+    echo "Cassandra already installed, skipping download."
+fi
 
 # Configure Cassandra
 echo "Configuring Cassandra..."
