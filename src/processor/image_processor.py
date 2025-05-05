@@ -9,11 +9,11 @@ class ImageProcessor:
     def __init__(self):
         self.spark = SparkSession.builder \
             .appName("ImageProcessingPipeline") \
-            .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1") \
+            .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,com.datastax.spark:spark-cassandra-connector_2.12:3.4.1") \
             .config("spark.cassandra.connection.host", "localhost") \
             .config("spark.cassandra.connection.port", "9042") \
-            .config("spark.cassandra.auth.username", "") \
-            .config("spark.cassandra.auth.password", "") \
+            .config("spark.cassandra.auth.username", "cassandra") \
+            .config("spark.cassandra.auth.password", "cassandra") \
             .getOrCreate()
 
         # Define schema for Kafka messages

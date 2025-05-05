@@ -93,8 +93,8 @@ def get_image(image_id):
         hdfs_path = f"/user/images/{image_id}.{row.format.lower()}"
         
         # Create temporary file
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-            hdfs_client.download(hdfs_path, temp_file.name)
+        with tempfile.NamedTemporaryFile(delete=False, suffix=f'.{row.format.lower()}') as temp_file:
+            hdfs_client.download(hdfs_path, temp_file.name, overwrite=True)
             return send_file(
                 temp_file.name,
                 mimetype=f'image/{row.format.lower()}',

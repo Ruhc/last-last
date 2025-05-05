@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Выдать права на все скрипты
+chmod +x scripts/*.sh
+
+# Удалить топик images, если существует
+/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic images || true
+
 # Exit on error
 set -e
 
